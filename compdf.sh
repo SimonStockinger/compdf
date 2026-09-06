@@ -96,8 +96,8 @@ else
 fi
 
 # Expand ranges & collect individual page numbers
-raw_pages=$(grep -v '^[[:space:]]*$' "$PAGE_FILE" | grep -v '^[[:space:]]*#' | tr ',' '\n' | sed 's/[[:space:]]//g')
-
+# New:
+raw_pages=$(grep -v '^[[:space:]]*#' "$PAGE_FILE" | tr ',[:blank:]' '\n' | sed 's/[[:space:]]//g' | grep -v '^$')
 expanded_pages=()
 while IFS= read -r token; do
     [ -z "$token" ] && continue
